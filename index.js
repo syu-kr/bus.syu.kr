@@ -16,16 +16,7 @@
 const express = require('express')
 const http = require('http')
 const fs = require('fs')
-const cors = require('cors')
-
 const app = express()
-
-app.use(
-  cors({
-    origin: 'https://bus.syu.kr',
-    credentials: true,
-  }),
-)
 
 app.use('/', express.static(__dirname + '/public'))
 
