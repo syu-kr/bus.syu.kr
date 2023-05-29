@@ -37,11 +37,12 @@ setInterval(function () {
       html += '<div style="display: flex; align-items: center">'
       html += setBusIcon(data['data'][datas], 24)
       html += setBusName(data['data'][datas]) + ' 방면'
+      html += ' (' + nearBusStop(data['data'][datas]) + ' 지나는 중)'
       html += '</div>'
     }
     if (html == '') html = '운행 정보 없음'
     document.getElementById('busStatus').innerHTML = html
-    console.log(jsondata)
+    //console.log(jsondata)
   })
 }, 2000)
 
@@ -72,4 +73,14 @@ function setBusName(datas) {
   else if (routeid == 3) return '별내'
   else if (routeid == 4) return '구리'
   else return '알 수 없음'
+}
+
+function nearBusStop(pos) {
+  let meter = {}
+  for (let index in busStop) {
+    meter[index] = getDistance(pos, busStop[index])
+  }
+  const sorted = Object.fromEntries(Object.entries(meter).sort((a, b) => a[1] - b[1]))
+  //console.log(sorted)
+  return Object.keys(sorted)[0]
 }

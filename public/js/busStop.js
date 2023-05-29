@@ -48,6 +48,15 @@ const busIcon = `
   <img src="/icon/정류장.png" width="56" height="56" alt="">
 `
 for (let index in busStop) {
+  if (
+    index == '경춘선숲길' ||
+    index == '서울여대, 육군사관학교' ||
+    index == '태릉' ||
+    index == '태릉선수촌' ||
+    index == '삼육대 정문'
+  ) {
+    continue
+  }
   var position = new naver.maps.LatLng(busStop[index]['lat'], busStop[index]['lon'])
   var markerOptions = {
     position: position,
