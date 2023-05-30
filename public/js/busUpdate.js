@@ -21,6 +21,9 @@ setInterval(function () {
     jsondata = data
     let html = ''
     for (let datas in data['data']) {
+      if (data['data'][datas]['status'] == '0') {
+        continue
+      }
       var position = new naver.maps.LatLng(data['data'][datas]['lat'], data['data'][datas]['lon'])
       var markerOptions = {
         position: position,
@@ -37,7 +40,19 @@ setInterval(function () {
       html += '<div style="display: flex; align-items: center">'
       html += setBusIcon(data['data'][datas], 24)
       html += setBusName(data['data'][datas]) + ' 방면'
-      html += ' (' + nearBusStop(data['data'][datas]) + ' 지나는 중)'
+      const nearestBusStop = nearBusStop(data['data'][datas])
+      html += ' (' + nearestBusStop
+      if (
+        nearestBusStop == '삼육대' ||
+        nearestBusStop == '화랑대역' ||
+        nearestBusStop == '태릉입구역' ||
+        nearestBusStop == '석계역' ||
+        nearestBusStop == '별내역'
+      ) {
+        html += ' 곧도착)'
+      } else {
+        html += ' 접근중)'
+      }
       html += '</div>'
     }
     if (html == '') html = '운행 정보 없음'
@@ -50,7 +65,8 @@ function setBusIcon(datas, size) {
   let routeid = datas['routeid']
   let status = datas['status']
 
-  if (status == 2)
+  if (status == 0) return '<div></div>'
+  else if (status == 2)
     return '<img src="/icon/삼육대.png" width="' + size + '" height="' + size + '" alt="">'
   else if (routeid == 1)
     return '<img src="/icon/화랑대.png" width="' + size + '" height="' + size + '" alt="">'
@@ -60,7 +76,7 @@ function setBusIcon(datas, size) {
     return '<img src="/icon/별내.png" width="' + size + '" height="' + size + '" alt="">'
   else if (routeid == 4)
     return '<img src="/icon/구리.png" width="' + size + '" height="' + size + '" alt="">'
-  else return '알 수 없음'
+  else return '<div></div>'
 }
 
 function setBusName(datas) {
