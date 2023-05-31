@@ -48,6 +48,21 @@
         --bs-accordion-body-padding-x: 0rem;
         --bs-accordion-body-padding-y: 0rem;
       }
+      table {
+        width: 100%;
+        border-top: 1px solid #cfe2ff;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border-bottom: 1px solid #cfe2ff;
+        border-left: 1px solid #cfe2ff;
+        padding: 2px;
+      }
+      th:first-child,
+      td:first-child {
+        border-left: none;
+      }
     </style>
   </head>
   <body>
@@ -92,14 +107,13 @@
                     <img src="/icon/별내.png" width="24" height="24" alt="" />
                     <span style="font-weight: bold">별내 방면</span>
                   </div>
-                  <div>버스 아이콘을 클릭하면 버스 정보가 표시됩니다.</div>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                 <button
-                  class="accordion-button"
+                  class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#panelsStayOpen-collapseTwo"
@@ -110,7 +124,7 @@
               </h2>
               <div
                 id="panelsStayOpen-collapseTwo"
-                class="accordion-collapse collapse show"
+                class="accordion-collapse collapse"
                 aria-labelledby="panelsStayOpen-headingTwo">
                 <div class="accordion-body">
                   <div style="display: flex; align-items: center">
@@ -145,13 +159,34 @@
                   data-bs-target="#panelsStayOpen-collapseThree"
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseThree">
-                  Bus Status
+                  Bus Time
                 </button>
               </h2>
               <div
                 id="panelsStayOpen-collapseThree"
                 class="accordion-collapse collapse show"
                 aria-labelledby="panelsStayOpen-headingThree">
+                <div class="accordion-body">
+                  <div id="busTime" style="overflow-y: scroll; height: 200px"></div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseFour"
+                  aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseFour">
+                  Bus Status
+                </button>
+              </h2>
+              <div
+                id="panelsStayOpen-collapseFour"
+                class="accordion-collapse collapse show"
+                aria-labelledby="panelsStayOpen-headingFour">
                 <div class="accordion-body">
                   <div id="busStatus"></div>
                 </div>
@@ -244,5 +279,6 @@
     <script type="text/javascript" src="/js/trafficUpdate.js"></script>
     <script type="text/javascript" src="/js/busStop.js"></script>
     <script type="text/javascript" src="/js/busDev.js"></script>
+    <script type="text/javascript" src="/js/busTime.js"></script>
   </body>
 </html>
