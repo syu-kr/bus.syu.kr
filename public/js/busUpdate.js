@@ -1,6 +1,28 @@
 let busPosition = {
   '서울71나1010': null,
   '71저1221': null,
+  '71저1220': null,
+  '71버1637': null,
+  '71저1210': null,
+  '1701': null,
+  '70라8517': null,
+}
+
+let busNames = {
+  '서울71나1010': null,
+  '71저1221': null,
+  '71저1220': null,
+  '71버1637': null,
+  '71저1210': null,
+  '1701': null,
+  '70라8517': null,
+}
+
+let busPositions = {
+  '서울71나1010': null,
+  '71저1221': null,
+  '71저1220': null,
+  '71버1637': null,
   '71저1210': null,
   '1701': null,
   '70라8517': null,
@@ -39,9 +61,12 @@ setInterval(function () {
       busPosition[data['data'][datas]['name']] = marker
       html += '<div style="display: flex; align-items: center">'
       html += setBusIcon(data['data'][datas], 24)
+      html += '<span style="font-size: 8px">'
+      html += ' [' + data['data'][datas]['name'] + '] '
       html += setBusName(data['data'][datas]) + ' 방면'
+      html += '</span>'
       const nearestBusStop = nearBusStop(data['data'][datas])
-      html += ' (' + nearestBusStop
+      html += '(' + nearestBusStop
       if (
         nearestBusStop == '삼육대' ||
         nearestBusStop == '화랑대역' ||
@@ -54,7 +79,38 @@ setInterval(function () {
         html += ' 접근중)'
       }
       html += '</div>'
+      busNames[data['data'][datas]['name']] = setBusName(data['data'][datas])
+      busPositions[data['data'][datas]['name']] = nearestBusStop
     }
+    for (busName in busPosition) {
+      let busMarker = busPosition[busName]
+      if (busMarker == null) {
+        continue
+      }
+      let businfowindow = new naver.maps.InfoWindow({
+        content:
+          '<div style="font-weight: bold">' +
+          ' [' +
+          busName +
+          '] ' +
+          busNames[busName] +
+          ' 방면' +
+          '</div>' +
+          '<div style="font-weight: bold">' +
+          busPositions[busName] +
+          ' 부근' +
+          '</div>',
+        anchor: new naver.maps.Point(32, 52),
+      })
+      naver.maps.Event.addListener(busMarker, 'mouseover click', function (event) {
+        if (businfowindow.getMap()) {
+          businfowindow.close()
+        } else {
+          businfowindow.open(map, busMarker)
+        }
+      })
+    }
+    // console.log(busPosition)
     if (html == '') html = '운행 정보 없음'
     document.getElementById('busStatus').innerHTML = html
     //console.log(jsondata)
