@@ -25,6 +25,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
+  if (!fs.existsSync(__dirname + '/../bus-api/api.json')) {
+    res.status(401).json({statusCode: 401, message: 'data not found.'})
+    return
+  }
   const jsonData = JSON.parse(fs.readFileSync(__dirname + '/../bus-api/api.json', 'utf8'))
   res.status(200).json(jsonData)
 })
@@ -33,4 +37,4 @@ app.get('*', (req, res) => {
   res.status(404).json({statusCode: 404, message: 'unknown request.'})
 })
 
-http.createServer(app).listen(1234, '0.0.0.0')
+http.createServer(app).listen(4747, '0.0.0.0')
