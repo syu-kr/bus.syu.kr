@@ -24,12 +24,25 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(__dirname + '/page/index.html')
 })
 
+app.get('/monitor', (req, res) => {
+  res.status(200).sendFile(__dirname + '/page/monitor.html')
+})
+
 app.get('/api', (req, res) => {
   if (!fs.existsSync(__dirname + '/../bus-api/api.json')) {
     res.status(401).json({statusCode: 401, message: 'data not found.'})
     return
   }
   const jsonData = JSON.parse(fs.readFileSync(__dirname + '/../bus-api/api.json', 'utf8'))
+  res.status(200).json(jsonData)
+})
+
+app.get('/api/monitor', (req, res) => {
+  if (!fs.existsSync(__dirname + '/../bus-api/monitor.json')) {
+    res.status(401).json({statusCode: 401, message: 'data not found.'})
+    return
+  }
+  const jsonData = JSON.parse(fs.readFileSync(__dirname + '/../bus-api/monitor.json', 'utf8'))
   res.status(200).json(jsonData)
 })
 
