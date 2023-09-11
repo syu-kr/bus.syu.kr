@@ -27,6 +27,18 @@ function convertStation(prev, pres) {
   else station = station + ' (도착)'
   return station
 }
+function convertName(name) {
+  let busname = name
+  if (busname == '서울71나1010') busname = '71나 1010'
+  else if (busname == '71저1221') busname = '71저 1221'
+  else if (busname == '71저1220') busname = '71저 1220'
+  else if (busname == '71버1637') busname = '71버 1637'
+  else if (busname == '71저1221') busname = '71저 1221'
+  else if (busname == '71저1210') busname = '71저 1210'
+  else if (busname == '1701') busname = '71버 1701'
+  else if (busname == '70라8517') busname = '70라 8517'
+  return busname
+}
 getRequest().then((data) => {
   let table_tag = ''
   for (let busname in data) {
@@ -65,7 +77,7 @@ getRequest().then((data) => {
     table_tag += `
     <span style="font-size: 1.7rem">
       <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
-      <strong>${busname}</strong>
+      <strong>${convertName(busname)}</strong>
     </span>
     <div class="table-responsive">
       <table class="table table-dark">
