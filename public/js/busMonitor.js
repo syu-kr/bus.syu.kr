@@ -33,18 +33,95 @@ function convertName(name) {
   else if (busname == '71저1221') busname = '71저 1221'
   else if (busname == '71저1220') busname = '71저 1220'
   else if (busname == '71버1637') busname = '71버 1637'
-  else if (busname == '71저1221') busname = '71저 1221'
+  else if (busname == '71저1244') busname = '71저 1244'
   else if (busname == '71저1210') busname = '71저 1210'
   else if (busname == '1701') busname = '71버 1701'
   else if (busname == '70라8517') busname = '70라 8517'
   return busname
 }
-getRequest().then((data) => {
+function dateFormat(date) {
+  const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토']
+  let month = date.getMonth() + 1
+  let day = date.getDate()
+  let hour = date.getHours()
+  let minute = date.getMinutes()
+  let second = date.getSeconds()
+  let week = WEEKDAY[date.getDay()]
+  month = month >= 10 ? month : '0' + month
+  day = day >= 10 ? day : '0' + day
+  hour = hour >= 10 ? hour : '0' + hour
+  minute = minute >= 10 ? minute : '0' + minute
+  second = second >= 10 ? second : '0' + second
+  return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second + ' ' + week
+  // return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ' ' + week
+}
+function dayCount(d1, d2) {
+  const date = new Date(d1).getTime() - new Date(d2).getTime()
+  return Math.ceil(Math.abs(date / (1000 * 60 * 60 * 24)))
+}
+function createTable(busstop) {
   let table_tag = ''
-  for (let busname in data) {
+  let date = ''
+  for (const info of busstop) {
+    if (date == dateFormat(new Date(info['time'] * 1000)).split(' ')[0]) {
+      continue
+    }
+    if (date == '') {
+      date = dateFormat(new Date(info['time'] * 1000)).split(' ')[0]
+    }
+    if (dayCount(dateFormat(new Date(info['time'] * 1000)).split(' ')[0], new Date()) >= 7) {
+      continue
+    }
+    table_tag += `
+    <table class="table table-dark" style="width: 20%; float: left;">
+      <thead>
+        <tr>
+          <th scope="col" style="color: yellow; text-align: center;" nowrap>
+          ${
+            dateFormat(new Date(info['time'] * 1000))
+              .split(' ')[0]
+              .substring(5) +
+            ' (' +
+            dateFormat(new Date(info['time'] * 1000)).split(' ')[2] +
+            ')'
+          }
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        ${createTbody(busstop, dateFormat(new Date(info['time'] * 1000)).split(' ')[0])}
+      </tbody>
+    </table>
+    `
+    date = dateFormat(new Date(info['time'] * 1000)).split(' ')[0]
+  }
+  return table_tag
+}
+function createTbody(busstop, date) {
+  let tbody_tag = ''
+  for (const info of busstop) {
+    let time = dateFormat(new Date(info['time'] * 1000))
+    if (date == time.split(' ')[0]) {
+      tbody_tag += `
+      <tr>
+        <td style="text-align: center;" nowrap><span style="color: white;">${time.split(' ')[1]}</span></td>
+      </tr>
+      `
+    }
+  }
+  return tbody_tag
+}
+getRequest().then((data) => {
+  let station = {
+    '화랑대역': [],
+    '태릉입구역': [],
+    '석계역': [],
+  }
+  let table_tag = ''
+  for (const busname in data) {
     let tbody_tag = ''
     let busstop = ''
-    for (let info of data[busname]) {
+    for (const info of data[busname]) {
       if (!getTaereungDirection(busstop, info['busstop'])) {
         continue
       }
@@ -65,6 +142,9 @@ getRequest().then((data) => {
         info['busstop'] != '삼육대 정문'
       ) {
         continue
+      }
+      if (info['busstop'] == '화랑대역' || info['busstop'] == '태릉입구역' || info['busstop'] == '석계역') {
+        station[info['busstop']].push({time: Math.floor(new Date(info['time']).getTime() / 1000), name: convertName(busname)})
       }
       tbody_tag += `
       <tr>
@@ -96,4 +176,31 @@ getRequest().then((data) => {
     `
   }
   document.getElementById('info').innerHTML = table_tag
+  let hwarangdae = station['화랑대역'].sort((a, b) => a.time - b.time)
+  let taereung = station['태릉입구역'].sort((a, b) => a.time - b.time)
+  let seokgye = station['석계역'].sort((a, b) => a.time - b.time)
+  let test_tag = `
+  <span style="font-size: 1.7rem">
+    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
+    <strong>화랑대역 (5번 출구)</strong>
+  </span>
+  <div class="table-responsive">
+    ${createTable(hwarangdae)}
+  </div>
+  <span style="font-size: 1.7rem">
+    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
+    <strong>태릉입구역 (7번 출구)</strong>
+  </span>
+  <div class="table-responsive">
+    ${createTable(taereung)}
+  </div>
+  <span style="font-size: 1.7rem">
+    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
+    <strong>석계역 (4번 출구)</strong>
+  </span>
+  <div class="table-responsive">
+    ${createTable(seokgye)}
+  </div>
+  `
+  document.getElementById('test').innerHTML = test_tag
 })
