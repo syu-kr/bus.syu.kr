@@ -57,7 +57,7 @@ function dateFormat(date) {
 }
 function dayCount(d1, d2) {
   const date = new Date(d1).getTime() - new Date(d2).getTime()
-  return Math.ceil(Math.abs(date / (1000 * 60 * 60 * 24)))
+  return Math.abs(date / (1000 * 60 * 60 * 24))
 }
 function createTable(busstop) {
   let table_tag = ''
@@ -69,7 +69,15 @@ function createTable(busstop) {
     if (date == '') {
       date = dateFormat(new Date(info['time'] * 1000)).split(' ')[0]
     }
-    if (dayCount(dateFormat(new Date(info['time'] * 1000)).split(' ')[0], new Date()) >= 7) {
+    // console.log(
+    //   dayCount(
+    //     dateFormat(new Date(info["time"] * 1000)).split(" ")[0] +
+    //       " " +
+    //       dateFormat(new Date(info["time"] * 1000)).split(" ")[1],
+    //     new Date()
+    //   )
+    // );
+    if (dayCount(dateFormat(new Date(info['time'] * 1000)).split(' ')[0] + ' ' + '08:00:00', new Date()) >= 7) {
       continue
     }
     table_tag += `
@@ -113,9 +121,9 @@ function createTbody(busstop, date) {
 }
 getRequest().then((data) => {
   let station = {
-    '화랑대역': [],
-    '태릉입구역': [],
-    '석계역': [],
+    화랑대역: [],
+    태릉입구역: [],
+    석계역: [],
   }
   let table_tag = ''
   for (const busname in data) {
@@ -144,7 +152,10 @@ getRequest().then((data) => {
         continue
       }
       if (info['busstop'] == '화랑대역' || info['busstop'] == '태릉입구역' || info['busstop'] == '석계역') {
-        station[info['busstop']].push({time: Math.floor(new Date(info['time']).getTime() / 1000), name: convertName(busname)})
+        station[info['busstop']].push({
+          time: Math.floor(new Date(info['time']).getTime() / 1000),
+          name: convertName(busname),
+        })
       }
       tbody_tag += `
       <tr>

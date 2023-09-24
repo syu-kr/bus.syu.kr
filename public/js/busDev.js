@@ -33,8 +33,7 @@ function getDistance(pos1, pos2) {
   var dLat = deg2rad(lat2 - lat1)
   var dLon = deg2rad(lng2 - lng1)
   var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   var d = R * c
   var convert = d.toFixed(5) * 1000 // convert km to m
@@ -51,8 +50,8 @@ let d3 = getDistance(busStop['석계역'], busStop['삼육대'])
 let d4 = getDistance(busStop['태릉입구역'], busStop['삼육대'])
 let d5 = getDistance(busStop['화랑대역'], busStop['삼육대'])
 
-document.getElementById('d1').innerHTML = '(' + d1 + 'm)'
-document.getElementById('d2').innerHTML = '(' + d2 + 'm)'
-document.getElementById('d3').innerHTML = '(' + d3 + 'm)'
-document.getElementById('d4').innerHTML = '(' + d4 + 'm)'
-document.getElementById('d5').innerHTML = '(' + d5 + 'm)'
+// document.getElementById('d1').innerHTML = '(' + d1 + 'm)'
+// document.getElementById('d2').innerHTML = '(' + d2 + 'm)'
+// document.getElementById('d3').innerHTML = '(' + d3 + 'm)'
+// document.getElementById('d4').innerHTML = '(' + d4 + 'm)'
+// document.getElementById('d5').innerHTML = '(' + d5 + 'm)'

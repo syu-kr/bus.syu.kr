@@ -104,4 +104,4 @@ for (let time in times) {
   </tr>`
 }
 html += '</tbody></table><div>'
-document.getElementById('busTime').innerHTML = html
+// document.getElementById('busTime').innerHTML = html
