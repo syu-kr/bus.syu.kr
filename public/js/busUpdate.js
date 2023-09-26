@@ -65,7 +65,7 @@ setInterval(function () {
       html += setBusName(data['data'][datas]) + ' 방면'
       html += '</span>'
       const nearestBusStop = nearBusStop(data['data'][datas])
-      html += '(' + nearestBusStop
+      html += '<span style="font-size: 14px">(' + nearestBusStop
       if (
         nearestBusStop == '삼육대' ||
         nearestBusStop == '화랑대역' ||
@@ -77,11 +77,11 @@ setInterval(function () {
       } else {
         html += ' 접근중)'
       }
-      html += '</div>'
+      html += '</span></div>'
       busNames[data['data'][datas]['name']] = setBusName(data['data'][datas])
       busPositions[data['data'][datas]['name']] = nearestBusStop
     }
-    for (busName in busPosition) {
+    for (let busName in busPosition) {
       let busMarker = busPosition[busName]
       if (busMarker == null) {
         continue
@@ -110,7 +110,12 @@ setInterval(function () {
       })
     }
     // console.log(busPosition)
-    if (html == '') html = '운행 정보 없음'
+    if (html == '') html = '<div>운행 정보 없음</div>'
+    if (new Date().getHours() < 12) {
+      html += '<div>※ 12시 전까지는 <strong>화랑대역 셔틀버스</strong>가 운행됩니다.</div>'
+    } else if (new Date().getHours() < 18) {
+      html += '<div>※ 18시 전까지는 <strong>석계역, 태릉입구역</strong> 셔틀버스가 운행됩니다.</div>'
+    }
     document.getElementById('busStatus').innerHTML = html
     //console.log(jsondata)
   })
