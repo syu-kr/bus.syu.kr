@@ -50,8 +50,8 @@ let d3 = getDistance(busStop['석계역'], busStop['삼육대'])
 let d4 = getDistance(busStop['태릉입구역'], busStop['삼육대'])
 let d5 = getDistance(busStop['화랑대역'], busStop['삼육대'])
 
-// document.getElementById('d1').innerHTML = '(' + d1 + 'm)'
-// document.getElementById('d2').innerHTML = '(' + d2 + 'm)'
-// document.getElementById('d3').innerHTML = '(' + d3 + 'm)'
-// document.getElementById('d4').innerHTML = '(' + d4 + 'm)'
-// document.getElementById('d5').innerHTML = '(' + d5 + 'm)'
+document.getElementById('d1').innerHTML = '(' + d1 + 'm)'
+document.getElementById('d2').innerHTML = '(' + d2 + 'm)'
+document.getElementById('d3').innerHTML = '(' + d3 + 'm)'
+document.getElementById('d4').innerHTML = '(' + d4 + 'm)'
+document.getElementById('d5').innerHTML = '(' + d5 + 'm)'

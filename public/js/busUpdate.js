@@ -113,7 +113,7 @@ setInterval(function () {
     if (html == '') html = '<div>운행 정보 없음</div>'
     if (new Date().getHours() < 12) {
       html += '<div>※ 12시 전까지는 <strong>화랑대역 셔틀버스</strong>가 운행됩니다.</div>'
-    } else if (new Date().getHours() < 18) {
+    } else if (new Date().getHours() < 19) {
       html += '<div>※ 18시 전까지는 <strong>석계역, 태릉입구역</strong> 셔틀버스가 운행됩니다.</div>'
     }
     document.getElementById('busStatus').innerHTML = html

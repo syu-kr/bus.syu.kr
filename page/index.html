@@ -95,109 +95,22 @@
               <i class="bi bi-chevron-double-up" style="color: white"></i>
             </button>
             <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#businfo">셔틀버스 정보</a>
+              </li>
+              <div class="dropdown-divider"></div>
+              <li>
+                <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#busdistance">셔틀버스 거리</a>
+              </li>
+              <div class="dropdown-divider"></div>
               <li><a class="dropdown-item" href="/monitor">셔틀버스 시간표</a></li>
               <div class="dropdown-divider"></div>
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">으아아아아아아아ㅏ아아아아악</a></li>
+              <li><a class="dropdown-item" href="javascript:onTraffic(this)">교통정보 ON / OFF</a></li>
             </ul>
           </div>
         </div>
         <div class="box">
           <div class="accordion" id="accordionPanelsStayOpenExample">
-            <!-- <div class="accordion-item">
-              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                <button
-                  class="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseOne"
-                  aria-expanded="true"
-                  aria-controls="panelsStayOpen-collapseOne">
-                  Bus Info
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                <div class="accordion-body">
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/정류장.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">정류장</span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/삼육대.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">삼육대 방면</span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/화랑대.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">화랑대 방면</span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/석계.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">석계 방면</span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/별내.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">별내 방면</span>
-                  </div>
-                  <div>
-                    <span style="font-size: 12px; font-weight: bold"> ※ 버스 아이콘 클릭시 버스 정보가 표시됩니다. </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseTwo">
-                  Bus Dev
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                <div class="accordion-body">
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/정류장.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">석계 <-> 태릉입구 <span id="d1"></span></span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/정류장.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">태릉입구 <-> 화랑대 <span id="d2"></span></span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/정류장.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">석계 <-> 삼육대 <span id="d3"></span></span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/정류장.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">태릉입구 <-> 삼육대 <span id="d4"></span></span>
-                  </div>
-                  <div style="display: flex; align-items: center">
-                    <img src="/icon/정류장.png" width="24" height="24" alt="" />
-                    <span style="font-weight: bold">화랑대 <-> 삼육대 <span id="d5"></span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                <button
-                  class="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseThree">
-                  Bus Time
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
-                <div class="accordion-body">
-                  <div id="busTime" style="overflow: auto; max-width: 300px; height: 150px"></div>
-                </div>
-              </div>
-            </div> -->
             <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingFour">
                 <button
@@ -208,7 +121,7 @@
                   data-bs-target="#panelsStayOpen-collapseFour"
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseFour">
-                  셔틀버스 실시간 정보
+                  셔틀버스 실시간 위치 정보
                 </button>
               </h2>
               <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
@@ -218,94 +131,91 @@
               </div>
             </div>
           </div>
-          <!-- <div style="text-align: center">
-            <button onclick="onTraffic(this)">실시간 교통</button>
-          </div> -->
         </div>
       </div>
-      <!-- <div class="info">
-        <div class="box">
-          <div style="text-align: center">Bus Info</div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">정류장</span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/삼육대.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">삼육대 방면</span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/화랑대.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">화랑대 방면</span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/석계.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">석계 방면</span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/별내.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">별내 방면</span>
-          </div>
-        </div>
-        <div class="box">
-          <div style="text-align: center">Bus Dev</div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">석계 <-> 태릉입구 <span id="d1"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">태릉입구 <-> 화랑대 <span id="d2"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">석계 <-> 삼육대 <span id="d3"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">태릉입구 <-> 삼육대 <span id="d4"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">화랑대 <-> 삼육대 <span id="d5"></span></span>
-          </div>
-          <div>
-            <button onclick="onTraffic(this)">실시간 교통 ON / OFF</button>
-          </div>
-        </div>
-        <div class="box">
-          <div style="text-align: center">Bus Status</div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">석계 <-> 태릉입구 <span id="d1"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">태릉입구 <-> 화랑대 <span id="d2"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">석계 <-> 삼육대 <span id="d3"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">태릉입구 <-> 삼육대 <span id="d4"></span></span>
-          </div>
-          <div style="display: flex; align-items: center">
-            <img src="/icon/정류장.png" width="24" height="24" alt="" />
-            <span style="font-weight: bold">화랑대 <-> 삼육대 <span id="d5"></span></span>
-          </div>
-        </div>
-      </div> -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="businfo" tabindex="-1" aria-labelledby="businfo" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">으아아아아아아아아아아아앙아아아아아악악</h5>
+              <h5 class="modal-title" id="businfo">셔틀버스 정보</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              으아아아아아아아아아아으아아아아아아아아아으아아아아아아아아아아아아으아아아아아아아아아아아아으아아아아아아아아아아아아으아아아아아아아아아아아아으아아아아아아아아아아아아으아아아아아아아아아아아아아아아아아아아아악악
+              <div style="display: flex; align-items: center">
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">정류장</span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/삼육대.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">삼육대 방면</span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/화랑대.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">화랑대역 방면</span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/석계.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">석계역 방면</span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/별내.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">별내역 방면</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="busdistance" tabindex="-1" aria-labelledby="busdistance" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="busdistance">셔틀버스 거리</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div style="display: flex; align-items: center">
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">석계역</span>
+                <span style="padding: 0px 5px 0px 5px">⇄</span>
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">태릉입구역</span>
+                <span id="d1" style="padding: 0px 0px 0px 5px"></span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">태릉입구역</span>
+                <span style="padding: 0px 5px 0px 5px">⇄</span>
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">화랑대역</span>
+                <span id="d2" style="padding: 0px 0px 0px 5px"></span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">석계역</span>
+                <span style="padding: 0px 5px 0px 5px">⇄</span>
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">삼육대</span>
+                <span id="d3" style="padding: 0px 0px 0px 5px"></span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">태릉입구역</span>
+                <span style="padding: 0px 5px 0px 5px">⇄</span>
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">삼육대</span>
+                <span id="d4" style="padding: 0px 0px 0px 5px"></span>
+              </div>
+              <div style="display: flex; align-items: center">
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">화랑대역</span>
+                <span style="padding: 0px 5px 0px 5px">⇄</span>
+                <img src="/icon/정류장.png" width="24" height="24" alt="" />
+                <span style="font-weight: bold">삼육대</span>
+                <span id="d5" style="padding: 0px 0px 0px 5px"></span>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

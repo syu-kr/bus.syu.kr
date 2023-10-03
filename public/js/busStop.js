@@ -26,9 +26,17 @@ let busStop = {
     lat: 37.6162,
     lon: 127.07129,
   },
+  '태릉입구역 1번출구': {
+    lat: 37.617421,
+    lon: 127.074648,
+  },
+  '화랑대역 1번출구': {
+    lat: 37.619892,
+    lon: 127.083249,
+  },
   '경춘선숲길, 토끼굴앞': {
-    lat: 37.6162,
-    lon: 127.07129,
+    lat: 37.619227,
+    lon: 127.079875,
   },
   '봉화산역': {
     lat: 37.61745,
@@ -70,7 +78,9 @@ const busIcon = `
 for (let index in busStop) {
   if (
     index == '월릉교' ||
+    index == '태릉입구역 1번출구' ||
     index == '경춘선숲길, 토끼굴앞' ||
+    index == '화랑대역 1번출구' ||
     index == '봉화산역' ||
     index == '두산대림아파트' ||
     index == '화랑대사거리' ||
@@ -82,6 +92,17 @@ for (let index in busStop) {
   ) {
     continue
   }
+  if (new Date().getHours() < 12) {
+    if (index == '태릉입구역' || index == '석계역') {
+      continue
+    }
+  }
+  if (new Date().getHours() < 19) {
+    if (index == '화랑대역') {
+      continue
+    }
+  }
+
   var position = new naver.maps.LatLng(busStop[index]['lat'], busStop[index]['lon'])
   var markerOptions = {
     position: position,
