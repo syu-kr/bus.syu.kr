@@ -92,16 +92,16 @@ for (let index in busStop) {
   ) {
     continue
   }
-  if (new Date().getHours() < 12) {
-    if (index == '태릉입구역' || index == '석계역') {
-      continue
-    }
-  }
-  if (new Date().getHours() < 19) {
-    if (index == '화랑대역') {
-      continue
-    }
-  }
+  // if (new Date().getHours() < 12) {
+  //   if (index == '태릉입구역' || index == '석계역') {
+  //     continue
+  //   }
+  // }
+  // if (new Date().getHours() < 19) {
+  //   if (index == '화랑대역') {
+  //     continue
+  //   }
+  // }
 
   var position = new naver.maps.LatLng(busStop[index]['lat'], busStop[index]['lon'])
   var markerOptions = {
