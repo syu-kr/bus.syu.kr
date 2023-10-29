@@ -18,6 +18,11 @@ const http = require('http')
 const fs = require('fs')
 const app = express()
 
+function dayCount(d1, d2) {
+  const date = new Date(d1).getTime() - new Date(d2).getTime()
+  return Math.abs(date / (1000 * 60 * 60 * 24))
+}
+
 app.use('/', express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => {
@@ -44,6 +49,17 @@ app.get('/api/monitor', (req, res) => {
   }
   const jsonData = JSON.parse(fs.readFileSync(__dirname + '/../bus-api/monitor.json', 'utf8'))
   res.status(200).json(jsonData)
+  // let newData = {}
+  // for (let index in jsonData) {
+  //   newData[index] = []
+  //   for (let info of jsonData[index]) {
+  //     if (dayCount(info['time'], new Date()) >= 10) {
+  //       continue
+  //     }
+  //     newData[index].push(info)
+  //   }
+  // }
+  // res.status(200).json(newData)
 })
 
 app.get('*', (req, res) => {

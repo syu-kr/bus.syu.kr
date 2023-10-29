@@ -118,6 +118,7 @@ for (let index in busStop) {
   if (name == '화랑대역') name = '화랑대역 (5번 출구)'
   else if (name == '태릉입구역') name = '태릉입구역 (7번 출구)'
   else if (name == '석계역') name = '석계역 (4번 출구)'
+  else if (name == '별내역') name = '별내역 (2번 출구)'
   let infowindow = new naver.maps.InfoWindow({
     content: '<div style="font-weight: bold">' + name + '</div>',
     anchor: new naver.maps.Point(32, 52),

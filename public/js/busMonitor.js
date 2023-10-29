@@ -32,6 +32,7 @@ function convertName(name) {
   if (busname == '서울71나1010') busname = '71나 1010'
   else if (busname == '71저1221') busname = '71저 1221'
   else if (busname == '71저1220') busname = '71저 1220'
+  else if (busname == '1220') busname = '71저 1220'
   else if (busname == '71버1637') busname = '71버 1637'
   else if (busname == '71저1244') busname = '71저 1244'
   else if (busname == '71저1210') busname = '71저 1210'
@@ -59,7 +60,18 @@ function dayCount(d1, d2) {
   const date = new Date(d1).getTime() - new Date(d2).getTime()
   return Math.abs(date / (1000 * 60 * 60 * 24))
 }
-function createTable(busstop) {
+function minutesCount(d1, d2) {
+  const date = new Date(d1).getTime() - new Date(d2).getTime()
+  return Math.abs(date / (1000 * 60))
+}
+function showModal(station, stime, bustime, busname) {
+  document.getElementById('bustest').innerHTML = `
+  <div>셔틀버스 번호판: <strong>${busname}</strong></div>
+  <div>삼육대에서 출발한 시간: <strong>${stime}</strong></div>
+  <div>${station}에서 출발한 시간: <strong><span style='color: red'>${bustime}</span></strong></div>
+  `
+}
+function createTable(busstop, station) {
   let table_tag = ''
   let date = ''
   for (const info of busstop) {
@@ -84,7 +96,7 @@ function createTable(busstop) {
     <table class="table table-dark" style="width: 20%; float: left;">
       <thead>
         <tr>
-          <th scope="col" style="color: yellow; text-align: center;" nowrap>
+          <th scope="col" style="background-color: #333; color: #2aaaff; text-align: center;" nowrap>
           ${
             dateFormat(new Date(info['time'] * 1000))
               .split(' ')[0]
@@ -97,7 +109,7 @@ function createTable(busstop) {
         </tr>
       </thead>
       <tbody>
-        ${createTbody(busstop, dateFormat(new Date(info['time'] * 1000)).split(' ')[0])}
+        ${createTbody(busstop, station, dateFormat(new Date(info['time'] * 1000)).split(' ')[0])}
       </tbody>
     </table>
     `
@@ -105,30 +117,69 @@ function createTable(busstop) {
   }
   return table_tag
 }
-function createTbody(busstop, date) {
+function createTbody(busstop, station, date) {
   let tbody_tag = ''
+  let time_check = '' // 위치 오류 긴급 패치
+  let bus_check = '' // 위치 오류 긴급 패치
   for (const info of busstop) {
     let time = dateFormat(new Date(info['time'] * 1000))
+    let stime = dateFormat(new Date(info['stime'] * 1000))
     if (date == time.split(' ')[0]) {
+      let bus_name = info['name']
+      if (station != '별내역') {
+        if (bus_check != '') {
+          if (bus_check == bus_name) {
+            continue
+          }
+        }
+      }
+      bus_check = bus_name
+      let bus_time = time.split(' ')[1].slice(0, -3)
+      let bus_stime =
+        minutesCount(new Date(info['stime'] * 1000), new Date(info['time'] * 1000)) <= 40
+          ? stime.split(' ')[1].slice(0, -3)
+          : '정보 없음'
       tbody_tag += `
       <tr>
-        <td style="text-align: center;" nowrap><span style="color: white;">${time.split(' ')[1]}</span></td>
+        <td style="text-align: center;" nowrap>
+          <span style="color: black;">
+            <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#businfo" onclick="showModal('${station}', '${bus_stime}','${bus_time}', '${bus_check}')">
+              <strong>${bus_time}</strong>
+            </a>
+          </span>
+        </td>
       </tr>
       `
+      // let time_minute = new Date(info['time'] * 1000)
+      // if (time_check != '') {
+      //   const diffMSec = time_minute.getTime() - time_check.getTime()
+      //   const diffMin = diffMSec / (60 * 1000)
+      //   if (diffMin <= 2) {
+      //     continue
+      //   }
+      // }
+      // tbody_tag += `
+      // <tr>
+      //   <td style="text-align: center;" nowrap><span style="color: black;"><strong>${time.split(' ')[1].slice(0, -3)}</strong></span></td>
+      // </tr>
+      // `
+      // time_check = time_minute
     }
   }
   return tbody_tag
 }
 getRequest().then((data) => {
   let station = {
-    화랑대역: [],
-    태릉입구역: [],
-    석계역: [],
+    '화랑대역': [],
+    '태릉입구역': [],
+    '석계역': [],
+    '별내역': [],
   }
   let table_tag = ''
   for (const busname in data) {
     let tbody_tag = ''
     let busstop = ''
+    let bussource = ''
     for (const info of data[busname]) {
       if (!getTaereungDirection(busstop, info['busstop'])) {
         continue
@@ -141,6 +192,9 @@ getRequest().then((data) => {
       }
       let convert = convertStation(busstop, info['busstop'])
       busstop = info['busstop']
+      if (info['busstop'] == '삼육대 정문') {
+        bussource = Math.floor(new Date(info['time']).getTime() / 1000)
+      }
       if (
         info['busstop'] != '석계역' &&
         info['busstop'] != '태릉입구역' &&
@@ -151,17 +205,23 @@ getRequest().then((data) => {
       ) {
         continue
       }
-      if (info['busstop'] == '화랑대역' || info['busstop'] == '태릉입구역' || info['busstop'] == '석계역') {
+      if (
+        info['busstop'] == '화랑대역' ||
+        info['busstop'] == '태릉입구역' ||
+        info['busstop'] == '석계역' ||
+        info['busstop'] == '별내역'
+      ) {
         station[info['busstop']].push({
           time: Math.floor(new Date(info['time']).getTime() / 1000),
+          stime: bussource,
           name: convertName(busname),
         })
       }
       tbody_tag += `
       <tr>
-        <td nowrap><span style="color: white;">${convert}</span></td>
-        <td nowrap><span style="color: white;">${info['time'].split(' ')[0]}</span></td>
-        <td nowrap><span style="color: white;">${info['time'].split(' ')[1]}</span></td>
+        <td nowrap><span style="color: black;">${convert}</span></td>
+        <td nowrap><span style="color: black;">${info['time'].split(' ')[0]}</span></td>
+        <td nowrap><span style="color: black;">${info['time'].split(' ')[1]}</span></td>
       </tr>
       `
     }
@@ -186,31 +246,39 @@ getRequest().then((data) => {
     </div>
     `
   }
-  document.getElementById('info').innerHTML = table_tag
+  // document.getElementById('info').innerHTML = table_tag
   let hwarangdae = station['화랑대역'].sort((a, b) => a.time - b.time)
-  let taereung = station['태릉입구역'].sort((a, b) => a.time - b.time)
   let seokgye = station['석계역'].sort((a, b) => a.time - b.time)
+  let taereung = station['태릉입구역'].sort((a, b) => a.time - b.time)
+  let byeollae = station['별내역'].sort((a, b) => a.time - b.time)
   let test_tag = `
   <span style="font-size: 1.7rem">
     <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
     <strong>화랑대역 (5번 출구)</strong>
   </span>
   <div class="table-responsive">
-    ${createTable(hwarangdae)}
-  </div>
-  <span style="font-size: 1.7rem">
-    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
-    <strong>태릉입구역 (7번 출구)</strong>
-  </span>
-  <div class="table-responsive">
-    ${createTable(taereung)}
+    ${createTable(hwarangdae, '화랑대역')}
   </div>
   <span style="font-size: 1.7rem">
     <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
     <strong>석계역 (4번 출구)</strong>
   </span>
   <div class="table-responsive">
-    ${createTable(seokgye)}
+    ${createTable(seokgye, '석계역')}
+  </div>
+  <span style="font-size: 1.7rem">
+    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
+    <strong>태릉입구역 (7번 출구)</strong>
+  </span>
+  <div class="table-responsive">
+    ${createTable(taereung, '태릉입구역')}
+  </div>
+  <span style="font-size: 1.7rem">
+    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
+    <strong>별내역 (2번 출구)</strong>
+  </span>
+  <div class="table-responsive">
+    ${createTable(byeollae, '별내역')}
   </div>
   `
   document.getElementById('test').innerHTML = test_tag
