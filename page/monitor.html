@@ -35,6 +35,32 @@
       .table > :not(caption) > * > * {
         border-bottom-color: #e2e2e2;
       }
+      .modal-dialog {
+        top: calc(30%);
+      }
+      table {
+        font-size: 23px;
+      }
+      @media (width < 1200px) {
+        table {
+          font-size: 21px;
+        }
+      }
+      @media (width < 992px) {
+        table {
+          font-size: 19px;
+        }
+      }
+      @media (width < 768px) {
+        table {
+          font-size: 17px;
+        }
+        .table > :not(caption) > * > * {
+          padding: 0.2rem 0.2rem;
+          /* padding: 60px; */
+          /* font-size: 8px; */
+        }
+      }
       @media (width < 576px) {
         table {
           font-size: 14px;
