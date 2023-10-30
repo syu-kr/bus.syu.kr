@@ -36,6 +36,16 @@ var mapOptions = {
 
 var map = new naver.maps.Map('map', mapOptions)
 
+function resize() {
+  var Size = new naver.maps.Size(window.innerWidth, window.innerHeight)
+  map.setSize(Size)
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  resize()
+  window.addEventListener('resize', resize)
+})
+
 // naver.maps.Event.addListener(map, 'zoom_changed', function (zoom) {})
 
 setInterval(function () {
