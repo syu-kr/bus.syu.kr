@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>SYU BUS MONITOR</title>
     <link rel="icon" href="https://syu.kr/favicon/favicon.ico" />
     <!-- Google tag (gtag.js) -->
@@ -29,6 +27,10 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"></script>
     <style>
+      .content {
+        display: flex;
+        align-items: center;
+      }
       .table-dark {
         --bs-table-bg: white;
       }
@@ -74,33 +76,27 @@
     </style>
   </head>
   <body>
-    <div style="padding: 20px 0px 0px 20px">
-      <span style="font-size: 1.7rem">
-        <img
-          src="https://www.syu.ac.kr/wp-content/uploads/2018/05/pg_thum.png"
-          width="35px"
-          height="auto"
-          style="vertical-align: text-bottom" />
-        <strong>삼육대학교 셔틀버스 모니터링</strong>
-      </span>
-    </div>
+    <div style="text-align: center; margin: 1rem; font-size: 20pt; font-weight: bold">삼육대학교 셔틀버스 도착시간</div>
     <hr />
-    <div style="text-align: center; color: red">※ 도착 시간을 누르면 셔틀버스의 정보가 뜹니다.</div>
+    <div style="text-align: center; margin: 1rem; color: red">※ 도착시간을 누르면 셔틀버스의 정보가 뜹니다.</div>
     <span id="test"></span>
     <span id="info"></span>
     <div class="modal fade" id="businfo" tabindex="-1" aria-labelledby="businfo" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="businfo">셔틀버스 정보</h5>
+            <div class="content" style="font-size: 1.5rem">
+              <img src="/icon/bus.png" width="32" height="32" style="margin-inline: 5px" alt="" />
+              <span style="font-weight: bold">셔틀버스 정보</span>
+            </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <span id="bustest"></span>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -136,9 +136,7 @@ function createTbody(busstop, station, date) {
       bus_check = bus_name
       let bus_time = time.split(' ')[1].slice(0, -3)
       let bus_stime =
-        minutesCount(new Date(info['stime'] * 1000), new Date(info['time'] * 1000)) <= 40
-          ? stime.split(' ')[1].slice(0, -3)
-          : '정보 없음'
+        minutesCount(new Date(info['stime'] * 1000), new Date(info['time'] * 1000)) <= 40 ? stime.split(' ')[1].slice(0, -3) : '정보 없음'
       tbody_tag += `
       <tr>
         <td style="text-align: center;" nowrap>
@@ -205,12 +203,7 @@ getRequest().then((data) => {
       ) {
         continue
       }
-      if (
-        info['busstop'] == '화랑대역' ||
-        info['busstop'] == '태릉입구역' ||
-        info['busstop'] == '석계역' ||
-        info['busstop'] == '별내역'
-      ) {
+      if (info['busstop'] == '화랑대역' || info['busstop'] == '태릉입구역' || info['busstop'] == '석계역' || info['busstop'] == '별내역') {
         station[info['busstop']].push({
           time: Math.floor(new Date(info['time']).getTime() / 1000),
           stime: bussource,
@@ -226,7 +219,7 @@ getRequest().then((data) => {
       `
     }
     table_tag += `
-    <span style="font-size: 1.7rem">
+    <span style="font-size: 1.5rem">
       <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
       <strong>${convertName(busname)}</strong>
     </span>
@@ -252,31 +245,37 @@ getRequest().then((data) => {
   let taereung = station['태릉입구역'].sort((a, b) => a.time - b.time)
   let byeollae = station['별내역'].sort((a, b) => a.time - b.time)
   let test_tag = `
-  <span style="font-size: 1.7rem">
-    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
-    <strong>화랑대역 (5번 출구)</strong>
-  </span>
+  <div class="content" style="font-size: 1.5rem">
+    <img src="/icon/bus.png" width="32" height="32" style="margin-inline: 5px;" alt="">
+    <span style="font-weight: bold;">화랑대역<span style="font-size: 1rem">(5번 출구)</span>
+    <img src="/naver.png" width="16" height="16" alt=""><a href="https://map.naver.com/p?c=17.29,0,0,0,adh&p=3eZ8qDo-t8Pv87VmTkM0Pw,92.43,2.14,37,Float" style="font-size: 0.7rem">네이버 로드뷰</a>
+    </span>
+  </div>
   <div class="table-responsive">
     ${createTable(hwarangdae, '화랑대역')}
   </div>
-  <span style="font-size: 1.7rem">
-    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
-    <strong>석계역 (4번 출구)</strong>
-  </span>
+  <div class="content" style="font-size: 1.5rem">
+    <img src="/icon/bus.png" width="32" height="32" style="margin-inline: 5px;" alt="">
+    <span style="font-weight: bold;">석계역<span style="font-size: 1rem">(4번 출구)</span>
+      <img src="/naver.png" width="16" height="16" alt=""><a href="https://map.naver.com/p?c=20.00,0,0,0,adh&p=4GnRNfOrmKEvJaxuRUwu_A,-136.19,-2.78,37,Float" style="font-size: 0.7rem">네이버 로드뷰</a>
+    </span>
+  </div>
   <div class="table-responsive">
     ${createTable(seokgye, '석계역')}
   </div>
-  <span style="font-size: 1.7rem">
-    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
-    <strong>태릉입구역 (7번 출구)</strong>
-  </span>
+  <div class="content" style="font-size: 1.5rem">
+    <img src="/icon/bus.png" width="32" height="32" style="margin-inline: 5px;" alt="">
+    <span style="font-weight: bold;">태릉입구역<span style="font-size: 1rem">(7번 출구)</span>
+      <img src="/naver.png" width="16" height="16" alt=""><a href="https://map.naver.com/p?c=17.03,0,0,0,adh&p=cMpFYL25FYM1xyAT8bqjig,-134.83,-1.58,37,Float" style="font-size: 0.7rem">네이버 로드뷰</a>
+    </span>
+  </div>
   <div class="table-responsive">
     ${createTable(taereung, '태릉입구역')}
   </div>
-  <span style="font-size: 1.7rem">
-    <img src="/icon/bus.png" width="32" height="32" style="vertical-align: text-bottom" alt="">
-    <strong>별내역 (2번 출구)</strong>
-  </span>
+  <div class="content" style="font-size: 1.5rem">
+    <img src="/icon/bus.png" width="32" height="32" style="margin-inline: 5px;" alt="">
+    <span style="font-weight: bold;">별내역<span style="font-size: 1rem">(2번 출구)</span></span>
+  </div>
   <div class="table-responsive">
     ${createTable(byeollae, '별내역')}
   </div>
