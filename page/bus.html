@@ -1,0 +1,459 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      let times = [
+        new Date(null, null, null, 12, 0),
+        new Date(null, null, null, 12, 25),
+        new Date(null, null, null, 12, 50),
+        new Date(null, null, null, 13, 15),
+        new Date(null, null, null, 13, 40),
+        new Date(null, null, null, 14, 5),
+        new Date(null, null, null, 14, 30),
+        new Date(null, null, null, 15, 0),
+        new Date(null, null, null, 15, 20),
+        new Date(null, null, null, 15, 40),
+        new Date(null, null, null, 16, 0),
+        new Date(null, null, null, 16, 20),
+        new Date(null, null, null, 16, 40),
+        new Date(null, null, null, 17, 0),
+        new Date(null, null, null, 17, 20),
+        new Date(null, null, null, 17, 40),
+        new Date(null, null, null, 18, 0),
+        new Date(null, null, null, 18, 15),
+      ]
+
+      let check = ''
+    </script>
+    <script>
+      function seokgye() {
+        document.getElementById('seokgye').style.display = 'block'
+        document.getElementById('sahmyook').style.display = 'none'
+        document.getElementById('seokgye-button').style.borderBottom = '2px solid #2aaaff'
+        document.getElementById('sahmyook-button').style.borderBottom = '2px solid gray'
+        check = 'seokgye'
+        document.getElementById('s1_arrow').style.display = 'block'
+      }
+
+      function sahmyook() {
+        document.getElementById('seokgye').style.display = 'none'
+        document.getElementById('sahmyook').style.display = 'block'
+        document.getElementById('seokgye-button').style.borderBottom = '2px solid gray'
+        document.getElementById('sahmyook-button').style.borderBottom = '2px solid #2aaaff'
+        check = 'sahmyook'
+        document.getElementById('s1_arrow').style.display = 'block'
+      }
+    </script>
+    <style>
+      @keyframes blink-effect {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .blink {
+        font-weight: 800;
+        color: red;
+        animation: blink-effect 1.5s step-end infinite;
+      }
+    </style>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Tektur:wght@500&display=swap');
+
+      body {
+        font-weight: 700;
+        font-family: 'Nanum Gothic';
+      }
+
+      .container {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .box {
+        position: relative;
+        height: 50px;
+        font-size: 18pt;
+        /* border-top: 2px solid gray; */
+        text-align: justify;
+      }
+
+      .box:first-child .left {
+        top: 20px;
+      }
+
+      .box:first-child .right {
+        border-top: none;
+      }
+
+      .box:last-child .left {
+        top: -20px;
+      }
+
+      .left {
+        position: absolute;
+        height: 100%;
+        width: 4px;
+        margin-right: 30px;
+        margin-left: 30px;
+        background-color: #2aaaff;
+      }
+
+      .right {
+        /* position: absolute; */
+        padding-left: 62px;
+        padding-top: 10px;
+        border-top: 2px solid gray;
+      }
+
+      .checker {
+        position: absolute;
+        top: 16px;
+        left: 24px;
+        width: 16px;
+        height: 16px;
+      }
+
+      .bus {
+        position: relative;
+        z-index: 1;
+        top: 46px;
+        left: 16px;
+        width: 100px;
+        height: 0px;
+      }
+
+      .button {
+        display: inline-block;
+        font-size: 18pt;
+        margin-right: 15px;
+        margin-left: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid gray;
+        cursor: pointer;
+      }
+
+      #seokgye {
+        display: none;
+      }
+
+      #sahmyook {
+        display: none;
+      }
+    </style>
+    <style>
+      #s1_arrow {
+        /* display: inline-block; */
+        display: none;
+        width: 10px;
+        height: 0px;
+        position: relative;
+        z-index: 1;
+        left: 27px;
+        text-align: center;
+        animation: arrow_down 1.5s infinite;
+      }
+
+      .scroll-arrow {
+        position: absolute;
+        top: -35px;
+        width: 6px;
+        height: 6px;
+        border-right: 4px solid #2aaaff;
+        border-bottom: 4px solid #2aaaff;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        animation: arrow-wave 1s infinite;
+        animation-direction: alternate;
+      }
+
+      .scroll-arrow:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .scroll-arrow:nth-child(2) {
+        margin-top: 6px;
+        animation-delay: 0.2s;
+      }
+
+      .scroll-arrow:nth-child(3) {
+        margin-top: 6px;
+        animation-delay: 0.3s;
+      }
+
+      @keyframes arrow-wave {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes arrow_down {
+        0% {
+          top: 48px;
+        }
+        50% {
+          top: 60px;
+        }
+        100% {
+          top: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+    <div class="container">
+      <div style="border: 3px solid #2aaaff">
+        <div style="margin: 10px"><div id="time"></div></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="button" id="seokgye-button" onclick="seokgye()">석계역 방면</div>
+      <div class="button" id="sahmyook-button" onclick="sahmyook()">삼육대 방면</div>
+    </div>
+    <div id="bus"></div>
+    <div id="s1_arrow">
+      <div class="scroll-arrow"></div>
+      <div class="scroll-arrow"></div>
+    </div>
+    <div class="container" id="seokgye">
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right">삼육대학교</div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">삼육대학교 정문</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">태릉선수촌</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">태릉</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">서울여대, 육군사관학교</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">경춘선숲길</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right">화랑대사거리</div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right">태릉입구역</div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">월릉교</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right">석계역</div>
+      </div>
+    </div>
+    <div class="container" id="sahmyook">
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /></span>
+        <div class="right">석계역</div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /></span>
+        <div class="right"><span style="color: gray">월릉교</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right">태릉입구역</div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">화랑대사거리</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">경춘선숲길</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">서울여대, 육군사관학교</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">태릉</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">태릉선수촌</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right"><span style="color: gray">삼육대학교 정문</span></div>
+      </div>
+      <div class="box">
+        <div class="left"></div>
+        <span class="checker"><img src="location.png" width="16" height="16" /> </span>
+        <div class="right">삼육대학교</div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/busStatus.js"></script>
+    <script type="text/javascript" src="/js/busTest.js"></script>
+    <script>
+      function msg(masTime, diffHour, diffMin) {
+        let msg = `
+        <span class="blink">
+          ${diffMin > 0 ? diffHour + '시' + diffMin + '분' : '잠시'}
+        </span>
+        뒤 삼육대에서 출발 예정
+        <div style="font-size: 8pt; color: gray;">
+          ${('0' + masTime.getHours()).slice(-2)}시 ${('0' + masTime.getMinutes()).slice(-2)}분에 출발하는 버스입니다.
+        </div>`
+        return msg
+      }
+
+      function diffDay(times) {
+        let str = ''
+        if (check == 'seokgye') {
+          for (time of times) {
+            const todayTime = new Date()
+            const TIME_ZONE = 9 * 60 * 60 * 1000
+            const masTime = new Date(
+              new Date(todayTime.getTime() + TIME_ZONE).toISOString().split('T')[0] +
+                ' ' +
+                time.toTimeString().split(' ')[0],
+            )
+            const diff = masTime - todayTime
+            const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24))
+            const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24)
+            const diffMin = Math.floor((diff / (1000 * 60)) % 60)
+            const diffSec = Math.floor((diff / 1000) % 60)
+
+            if (todayTime.getHours() < 12) {
+              str = msg(masTime, diffHour, diffMin)
+              break
+            } else if (todayTime.getHours() == 12) {
+              if (masTime.getHours() == 12) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              } else {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            } else if (todayTime.getHours() == 13) {
+              if (masTime.getHours() == 13) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              }
+              if (masTime.getHours() == 14) {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            } else if (todayTime.getHours() == 14) {
+              if (masTime.getHours() == 14) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              }
+              if (masTime.getHours() == 15) {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            } else if (todayTime.getHours() == 15) {
+              if (masTime.getHours() == 15) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              }
+              if (masTime.getHours() == 16) {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            } else if (todayTime.getHours() == 16) {
+              if (masTime.getHours() == 16) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              }
+              if (masTime.getHours() == 17) {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            } else if (todayTime.getHours() == 17) {
+              if (masTime.getHours() == 17) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              }
+              if (masTime.getHours() == 18) {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            } else if (todayTime.getHours() == 18) {
+              if (masTime.getHours() == 18) {
+                if (todayTime.getMinutes() <= masTime.getMinutes()) {
+                  str = msg(masTime, diffHour, diffMin)
+                  break
+                }
+              }
+              if (masTime.getHours() == 19) {
+                str = msg(masTime, diffHour, diffMin)
+                break
+              }
+            }
+          }
+        } else if (check == 'sahmyook') {
+          str = '도착 예정 시간 준비중입니다..'
+        } else {
+          str = '석계역 또는 삼육대 방면을 선택하세요.'
+        }
+
+        document.getElementById('time').innerHTML = str == '' ? '다음 운행정보 없음' : str
+      }
+
+      setInterval(function () {
+        diffDay(times)
+      }, 1500)
+    </script>
+  </body>
+</html>

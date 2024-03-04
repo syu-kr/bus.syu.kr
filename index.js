@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(__dirname + '/page/index.html')
 })
 
+app.get('/bus', (req, res) => {
+  res.status(200).sendFile(__dirname + '/page/bus.html')
+})
+
 app.get('/monitor', (req, res) => {
   res.status(200).sendFile(__dirname + '/page/monitor.html')
 })
