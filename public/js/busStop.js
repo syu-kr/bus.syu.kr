@@ -115,9 +115,16 @@ for (let index in busStop) {
   var marker = new naver.maps.Marker(markerOptions)
   markers.push(marker)
   let name = index
-  if (name == '화랑대역') name = '화랑대역 (5번 출구)'
-  else if (name == '태릉입구역') name = '태릉입구역 (7번 출구)'
-  else if (name == '석계역') name = '석계역 (4번 출구)'
+  if (name == '삼육대') name = '삼육대학교'
+  else if (name == '화랑대역')
+    name =
+      '화랑대역 <span style="font-size: 0.7rem">(5번 출구)</span> <img src="/naver.png" width="16" height="16" alt=""><a href="https://map.naver.com/p?c=17.29,0,0,0,adh&p=3eZ8qDo-t8Pv87VmTkM0Pw,88.45,1.31,80,Float" style="font-size: 0.7rem">네이버 로드뷰</a>'
+  else if (name == '석계역')
+    name =
+      '석계역 <span style="font-size: 0.7rem">(4번 출구)</span> <img src="/naver.png" width="16" height="16" alt=""><a href="https://map.naver.com/p?c=20.00,0,0,0,adh&p=4GnRNfOrmKEvJaxuRUwu_A,-136,-2.78,80,Float" style="font-size: 0.7rem">네이버 로드뷰</a>'
+  else if (name == '태릉입구역')
+    name =
+      '태릉입구역 <span style="font-size: 0.7rem">(7번 출구)</span> <img src="/naver.png" width="16" height="16" alt=""><a href="https://map.naver.com/p?c=17.03,0,0,0,adh&p=cMpFYL25FYM1xyAT8bqjig,-137.69,2.17,80,Float" style="font-size: 0.7rem">네이버 로드뷰</a>'
   else if (name == '별내역') name = '별내역 (2번 출구)'
   let infowindow = new naver.maps.InfoWindow({
     content: '<div style="font-weight: bold">' + name + '</div>',

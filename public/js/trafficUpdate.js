@@ -11,7 +11,9 @@ naver.maps.Event.once(map, 'init', function () {
 function onTraffic(obj) {
   if (trafficLayer.getMap()) {
     trafficLayer.setMap(null)
+    obj.innerText = '교통정보 켜기'
   } else {
     trafficLayer.setMap(map)
+    obj.innerText = '교통정보 끄기'
   }
 }
