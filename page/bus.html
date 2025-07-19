@@ -97,17 +97,18 @@
 
       .box {
         position: relative;
+        display: flex;
+        align-items: center;
         height: 50px;
         font-size: 18pt;
-        /* border-top: 2px solid gray; */
-        text-align: justify;
+        border-top: 2px solid gray;
       }
 
       .box:first-child .left {
         top: 20px;
       }
 
-      .box:first-child .right {
+      .box:first-child {
         border-top: none;
       }
 
@@ -125,23 +126,21 @@
       }
 
       .right {
-        /* position: absolute; */
         padding-left: 62px;
-        padding-top: 10px;
-        border-top: 2px solid gray;
       }
 
       .checker {
         position: absolute;
-        top: 16px;
+        /* top: 16px; */
         left: 24px;
-        width: 16px;
-        height: 16px;
+        z-index: 1;
+        /* width: 16px;
+        height: 16px; */
       }
 
       .bus {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         top: 46px;
         left: 16px;
         width: 100px;
